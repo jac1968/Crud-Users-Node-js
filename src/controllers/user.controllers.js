@@ -1,21 +1,21 @@
 const catchError = require('../utils/catchError');
 const User = require('../models/User');
 
-        //   E N D P O I N T S    //
+        //   C O N T R O L L E R S      C R U D   //
 
-// getAll - To get all users
+// getAll -  get all users
 const getAll = catchError(async(req, res) => {
     const result = await User.findAll()
     return res.json(result)
 });
 
-// create - to create one user
+// create -  create user
 const create = catchError(async(req, res) => {
     const result = await User.create(req.body)
     return res.status(201).json(result)
 })
 
-// getOne - To get one user for id
+// getOne -  get one user for id
 const getOne = catchError(async(req, res) => {
     const { id } = req.params
     const result = await User.findByPk(id)
@@ -23,7 +23,7 @@ const getOne = catchError(async(req, res) => {
     return res.json(result)
 })
 
-// destroy - To delete one user for id
+// destroy -  delete one user for id
 const destroy = catchError(async(req, res) => {
     const { id } = req.params
     const result = await User.destroy({ where: { id } })
@@ -31,7 +31,7 @@ const destroy = catchError(async(req, res) => {
     return res.sendStatus(204)
 })
 
-// update - To update one user for id
+// update -  update one user for id
 const update = catchError(async(req, res) => {
     const { id } = req.params
     const result = await User.update(req.body, {where: { id }, returning: true })
@@ -39,6 +39,7 @@ const update = catchError(async(req, res) => {
     return res.json(result[1][0])
     })
 
+    // Exports the controllers
 module.exports = {
     getAll,
     create,
